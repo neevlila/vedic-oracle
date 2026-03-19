@@ -445,16 +445,30 @@ export default function VedicOracle() {
     }
   }, [sc.id, lang, msgs, isDark]);
 
+  // Auto-scroll inside the chat:
+  // - Always jumps to bottom when a new message is added
+  // - While a response is streaming (`loading === true`), keep nudging to bottom
   useEffect(() => {
     if (!listRef.current) return;
-    const timeoutId = setTimeout(() => {
-      listRef.current?.scrollTo({
-        top: listRef.current.scrollHeight,
-        behavior: "smooth"
-      });
-    }, 100);
-    return () => clearTimeout(timeoutId);
-  }, [msgs, loading]);
+
+    const scrollToBottom = () => {
+      const el = listRef.current;
+      el.scrollTop = el.scrollHeight;
+    };
+
+    // Snap to bottom when messages change
+    scrollToBottom();
+
+    // While loading (assistant responding), keep following the growth
+    let intervalId = null;
+    if (loading) {
+      intervalId = setInterval(scrollToBottom, 120);
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [msgs.length, loading]);
 
   const filtered = cat === "All" ? SCRIPTURES : SCRIPTURES.filter(s => s.category === cat);
 
@@ -877,7 +891,7 @@ export default function VedicOracle() {
             minHeight: 0,
           }}>
             <div style={{
-              maxWidth: 720,
+              maxWidth: 1200,
               margin: "0 auto",
               padding: "24px 24px 0",
               minHeight: "100%",
@@ -891,7 +905,11 @@ export default function VedicOracle() {
                   textAlign: "center",
                   padding: "24px 20px 16px",
                   animation: "fadeUp 0.4s ease",
-                  marginTop: "auto",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  height: "80vh",
                 }}>
                   <div style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center",
@@ -1002,13 +1020,13 @@ export default function VedicOracle() {
             backdropFilter: "blur(20px)",
             borderTop: `1px solid ${T.border}`,
             flexShrink: 0, zIndex: 2, position: "relative",
-            marginTop: "auto",
+            marginBottom: "7px",
           }}>
-            <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", gap: 10, alignItems: "flex-end" }}>
+            <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", gap: 12, alignItems: "flex-end" }}>
               <textarea ref={inputRef} value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
-                placeholder={`Ask about ${sc.name}… (Enter to send)`}
+                placeholder={`Ask about ${sc.name}…`}
                 rows={1}
                 style={{
                   flex: 1,
@@ -1047,6 +1065,5 @@ export default function VedicOracle() {
           </div>
         </div>
       </div>
-    </>
-  );
+    </> );
 }
