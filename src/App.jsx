@@ -12,17 +12,17 @@ const LANGUAGES = [
 ];
 
 const SCRIPTURES = [
-  { id: "rig", category: "Veda", name: "Rigveda", sanskrit: "ऋग्वेद", symbol: "ॐ", color: "#f59e0b", glow: "#f59e0b44", desc: "Hymns of Creation & Gods", mantra: "ॐ तत्सवितुर्वरेण्यम्", focus: `the Rigveda — humanity's oldest scripture with 1028 hymns dedicated to Agni (fire), Indra (thunder), Soma (divine nectar), Varuna (cosmic law), and Surya (sun). You know the Nasadiya Sukta, Purusha Sukta, Gayatri Mantra, and the concept of Rta.`, suggestions: ["Who is Agni, the fire god?", "What is the Gayatri Mantra?", "Explain Nasadiya Sukta — creation hymn", "What is Rta — the cosmic order?"] },
-  { id: "sama", category: "Veda", name: "Samaveda", sanskrit: "सामवेद", symbol: "♪", color: "#10b981", glow: "#10b98144", desc: "Melodies & Sacred Chants", mantra: "ॐ आप्यायस्व समेतु ते", focus: `the Samaveda — the Veda of song with 1875 verses. You know the Udgitha (OM chant), Sama Gana, Nada Brahman (sound as God), and how chanting creates divine vibrations.`, suggestions: ["What is Nada Brahman?", "How does chanting heal the soul?", "What is the Udgitha?", "Why is OM the most sacred sound?"] },
-  { id: "yajur", category: "Veda", name: "Yajurveda", sanskrit: "यजुर्वेद", symbol: "🔥", color: "#ef4444", glow: "#ef444444", desc: "Rituals & Sacrificial Rites", mantra: "ॐ इषे त्वोर्जे त्वा", focus: `the Yajurveda — Veda of ritual action. Yajna (fire sacrifice), the Shatapatha Brahmana, Sri Rudram, Chamakam, and the deeper meaning of rituals as internal purification.`, suggestions: ["What is Yajna sacrifice?", "Explain the Sri Rudram", "How does karma purify the soul?", "Inner meaning of fire rituals?"] },
-  { id: "atharva", category: "Veda", name: "Atharvaveda", sanskrit: "अथर्ववेद", symbol: "✦", color: "#8b5cf6", glow: "#8b5cf644", desc: "Magic, Healing & Secret Arts", mantra: "ॐ शन्नो देवीरभिष्टय", focus: `the Atharvaveda — healing hymns (Ayurveda roots), protection mantras, the Prithvi Sukta (Hymn to Mother Earth), tantra knowledge, and secret wisdom.`, suggestions: ["What are the best protection mantras?", "Atharvaveda roots of Ayurveda", "What is the Prithvi Sukta?", "Secret tantra knowledge"] },
-  { id: "upanishad", category: "Upanishad", name: "Upanishads", sanskrit: "उपनिषद्", symbol: "🔆", color: "#06b6d4", glow: "#06b6d444", desc: "Secret Wisdom — Brahman & Atman", mantra: "ॐ पूर्णमदः पूर्णमिदम्", focus: `the 108 Upanishads — Brihadaranyaka, Chandogya (Tat Tvam Asi), Katha, Mundaka, Mandukya (OM's 4 states), Isha. Brahman, Atman, Maya, the 4 Mahavakyas, and paths to Moksha.`, suggestions: ["What is Tat Tvam Asi?", "What is Brahman vs Atman?", "Explain Maya — the cosmic illusion", "How to attain Moksha?"] },
-  { id: "gita", category: "Itihasa", name: "Bhagavad Gita", sanskrit: "भगवद्गीता", symbol: "🪷", color: "#0ea5e9", glow: "#0ea5e944", desc: "Krishna's Divine Song — 18 Chapters", mantra: "ॐ कर्मण्येवाधिकारस्ते", focus: `the Bhagavad Gita — all 18 chapters. Karma Yoga (Ch.3), Jnana Yoga (Ch.4), Bhakti Yoga (Ch.12), the immortal soul (Ch.2), Vishwarupa (Ch.11), three Gunas (Ch.14), Nishkama Karma, surrender (Ch.18).`, suggestions: ["What is Nishkama Karma?", "Explain Krishna's Vishwarupa", "What are Sattva, Rajas, Tamas?", "How to overcome fear — Gita Ch.2"] },
-  { id: "ramayana", category: "Itihasa", name: "Ramayana", sanskrit: "रामायण", symbol: "🏹", color: "#f97316", glow: "#f9731644", desc: "Epic of Lord Rama — Dharma & Devotion", mantra: "श्री राम जय राम जय जय राम", focus: `the Valmiki Ramayana (24,000 shlokas). All 7 Kandas. Rama as Maryada Purushottam, Sita's strength, Hanuman's devotion and power, Ravana's ego vs wisdom.`, suggestions: ["Who is Hanuman and his powers?", "Why is Rama Maryada Purushottam?", "Deeper meaning of Sita's abduction", "Ravana's ten heads — symbolism"] },
-  { id: "mahabharata", category: "Itihasa", name: "Mahabharata", sanskrit: "महाभारत", symbol: "⚔️", color: "#dc2626", glow: "#dc262644", desc: "Great War of Dharma — 100,000 Verses", mantra: "ॐ धर्मो रक्षति रक्षितः", focus: `the Mahabharata — 100,000 shlokas, 18 Parvas. Pandavas, Kauravas, Bhishma's vow, Karna's tragedy, Draupadi, Yaksha Prashna, Vidura Niti, dharma sankat.`, suggestions: ["Why is Karna the greatest tragic hero?", "What is the Yaksha Prashna?", "Bhishma's wisdom on his deathbed", "Why did Krishna allow the war?"] },
-  { id: "bhagavat", category: "Purana", name: "Srimad Bhagavatam", sanskrit: "श्रीमद्भागवतम्", symbol: "🌺", color: "#ec4899", glow: "#ec489944", desc: "Vishnu's Stories — 18,000 Verses", mantra: "ॐ नमो भगवते वासुदेवाय", focus: `the Srimad Bhagavatam — 12 Skandhas, 18,000 verses. Krishna's full life (Skandha 10), Prahlada, Dhruva, King Parikshit, 24 avatars of Vishnu, pure Bhakti.`, suggestions: ["Tell me about Krishna's Rasa Lila", "Story of Prahlada and Narasimha", "What are the 24 avatars of Vishnu?", "Story of Dhruva — the child devotee"] },
+  { id: "rig", category: "Veda", name: "Rigveda", sanskrit: "ऋग्वेद", symbol: "ॐ", color: "#f59e0b", glow: "#f59e0b44", desc: "Hymns of Creation & Gods", mantra: "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्", focus: `the Rigveda — humanity's oldest scripture with 1028 hymns dedicated to Agni (fire), Indra (thunder), Soma (divine nectar), Varuna (cosmic law), and Surya (sun). You know the Nasadiya Sukta, Purusha Sukta, Gayatri Mantra, and the concept of Rta.`, suggestions: ["Who is Agni, the fire god?", "What is the Gayatri Mantra?", "Explain Nasadiya Sukta — creation hymn", "What is Rta — the cosmic order?"] },
+  { id: "sama", category: "Veda", name: "Samaveda", sanskrit: "सामवेद", symbol: "♪", color: "#10b981", glow: "#10b98144", desc: "Melodies & Sacred Chants", mantra: "ॐ आप्यायस्व समेतु ते विश्वतः सोम वृष्णियम्", focus: `the Samaveda — the Veda of song with 1875 verses. You know the Udgitha (OM chant), Sama Gana, Nada Brahman (sound as God), and how chanting creates divine vibrations.`, suggestions: ["What is Nada Brahman?", "How does chanting heal the soul?", "What is the Udgitha?", "Why is OM the most sacred sound?"] },
+  { id: "yajur", category: "Veda", name: "Yajurveda", sanskrit: "यजुर्वेद", symbol: "🔥", color: "#ef4444", glow: "#ef444444", desc: "Rituals & Sacrificial Rites", mantra: "ॐ इषे त्वोर्जे त्वा वायवस्थ देवो वः सविता प्रार्पयतु", focus: `the Yajurveda — Veda of ritual action. Yajna (fire sacrifice), the Shatapatha Brahmana, Sri Rudram, Chamakam, and the deeper meaning of rituals as internal purification.`, suggestions: ["What is Yajna sacrifice?", "Explain the Sri Rudram", "How does karma purify the soul?", "Inner meaning of fire rituals?"] },
+  { id: "atharva", category: "Veda", name: "Atharvaveda", sanskrit: "अथर्ववेद", symbol: "✦", color: "#8b5cf6", glow: "#8b5cf644", desc: "Magic, Healing & Secret Arts", mantra: "ॐ शन्नो देवीरभिष्टय आपो भवन्तु पीतये", focus: `the Atharvaveda — healing hymns (Ayurveda roots), protection mantras, the Prithvi Sukta (Hymn to Mother Earth), tantra knowledge, and secret wisdom.`, suggestions: ["What are the best protection mantras?", "Atharvaveda roots of Ayurveda", "What is the Prithvi Sukta?", "Secret tantra knowledge"] },
+  { id: "upanishad", category: "Upanishad", name: "Upanishads", sanskrit: "उपनिषद्", symbol: "🔆", color: "#06b6d4", glow: "#06b6d444", desc: "Secret Wisdom — Brahman & Atman", mantra: "ॐ पूर्णमदः पूर्णमिदं पूर्णात्पूर्णमुदच्यते पूर्णस्य पूर्णमादाय पूर्णमेवावशिष्यते", focus: `the 108 Upanishads — Brihadaranyaka, Chandogya (Tat Tvam Asi), Katha, Mundaka, Mandukya (OM's 4 states), Isha. Brahman, Atman, Maya, the 4 Mahavakyas, and paths to Moksha.`, suggestions: ["What is Tat Tvam Asi?", "What is Brahman vs Atman?", "Explain Maya — the cosmic illusion", "How to attain Moksha?"] },
+  { id: "gita", category: "Itihasa", name: "Bhagavad Gita", sanskrit: "भगवद्गीता", symbol: "🪷", color: "#0ea5e9", glow: "#0ea5e944", desc: "Krishna's Divine Song — 18 Chapters", mantra: "ॐ कर्मण्येवाधिकारस्ते मा फलेषु कदाचन मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि", focus: `the Bhagavad Gita — all 18 chapters. Karma Yoga (Ch.3), Jnana Yoga (Ch.4), Bhakti Yoga (Ch.12), the immortal soul (Ch.2), Vishwarupa (Ch.11), three Gunas (Ch.14), Nishkama Karma, surrender (Ch.18).`, suggestions: ["What is Nishkama Karma?", "Explain Krishna's Vishwarupa", "What are Sattva, Rajas, Tamas?", "How to overcome fear — Gita Ch.2"] },
+  { id: "ramayana", category: "Itihasa", name: "Ramayana", sanskrit: "रामायण", symbol: "🏹", color: "#f97316", glow: "#f9731644", desc: "Epic of Lord Rama — Dharma & Devotion", mantra: "श्री राम जय राम जय जय राम ॐ रामाय नमः", focus: `the Valmiki Ramayana (24,000 shlokas). All 7 Kandas. Rama as Maryada Purushottam, Sita's strength, Hanuman's devotion and power, Ravana's ego vs wisdom.`, suggestions: ["Who is Hanuman and his powers?", "Why is Rama Maryada Purushottam?", "Deeper meaning of Sita's abduction", "Ravana's ten heads — symbolism"] },
+  { id: "mahabharata", category: "Itihasa", name: "Mahabharata", sanskrit: "महाभारत", symbol: "⚔️", color: "#dc2626", glow: "#dc262644", desc: "Great War of Dharma — 100,000 Verses", mantra: "ॐ धर्मो रक्षति रक्षितः धर्म एव हतो हन्ति", focus: `the Mahabharata — 100,000 shlokas, 18 Parvas. Pandavas, Kauravas, Bhishma's vow, Karna's tragedy, Draupadi, Yaksha Prashna, Vidura Niti, dharma sankat.`, suggestions: ["Why is Karna the greatest tragic hero?", "What is the Yaksha Prashna?", "Bhishma's wisdom on his deathbed", "Why did Krishna allow the war?"] },
+  { id: "bhagavat", category: "Purana", name: "Srimad Bhagavatam", sanskrit: "श्रीमद्भागवतम्", symbol: "🌺", color: "#ec4899", glow: "#ec489944", desc: "Vishnu's Stories — 18,000 Verses", mantra: "ॐ नमो भगवते वासुदेवाय नमः संसारसागरे मग्नं", focus: `the Srimad Bhagavatam — 12 Skandhas, 18,000 verses. Krishna's full life (Skandha 10), Prahlada, Dhruva, King Parikshit, 24 avatars of Vishnu, pure Bhakti.`, suggestions: ["Tell me about Krishna's Rasa Lila", "Story of Prahlada and Narasimha", "What are the 24 avatars of Vishnu?", "Story of Dhruva — the child devotee"] },
   { id: "puranas", category: "Purana", name: "18 Mahapuranas", sanskrit: "अष्टादश पुराण", symbol: "📿", color: "#a78bfa", glow: "#a78bfa44", desc: "Stories of Creation, Gods & Cosmos", mantra: "ॐ नमः शिवाय", focus: `all 18 Mahapuranas. Shiva-Parvati's love story, Durga Saptashati, Samudra Manthan, cosmology of yugas, creation-dissolution cycles.`, suggestions: ["Story of Samudra Manthan", "Shiva and Parvati's love story", "What is the Durga Saptashati?", "What are the four Yugas?"] },
-  { id: "yoga", category: "Darshana", name: "Yoga Sutras", sanskrit: "योगसूत्र", symbol: "🧘", color: "#34d399", glow: "#34d39944", desc: "Patanjali's Science of Mind", mantra: "ॐ योगश्चित्तवृत्तिनिरोधः", focus: `Patanjali's Yoga Sutras — 196 aphorisms. Ashtanga Yoga's 8 limbs, Chitta Vritti Nirodha, 5 Kleshas, Siddhis, and Kaivalya (liberation).`, suggestions: ["What are the 8 limbs of Ashtanga Yoga?", "How to still the mind?", "What are the Siddhis?", "What is Kaivalya?"] },
+  { id: "yoga", category: "Darshana", name: "Yoga Sutras", sanskrit: "योगसूत्र", symbol: "🧘", color: "#34d399", glow: "#34d39944", desc: "Patanjali's Science of Mind", mantra: "ॐ योगश्चित्तवृत्तिनिरोधः तदा द्रष्टुः स्वरूपेऽवस्थानम्", focus: `Patanjali's Yoga Sutras — 196 aphorisms. Ashtanga Yoga's 8 limbs, Chitta Vritti Nirodha, 5 Kleshas, Siddhis, and Kaivalya (liberation).`, suggestions: ["What are the 8 limbs of Ashtanga Yoga?", "How to still the mind?", "What are the Siddhis?", "What is Kaivalya?"] },
 ];
 
 const CATEGORIES = ["All", "Veda", "Upanishad", "Itihasa", "Purana", "Darshana"];
@@ -96,7 +96,15 @@ const Mandala = ({ color, size = 300, rev = false }) => (
         <circle key={i} r={r} fill="none" stroke={color} strokeWidth={i === 2 ? "0.9" : "0.45"}
           opacity="0.22" strokeDasharray={i % 2 === 0 ? "3 5" : "7 3"} />
       ))}
+      <text x="0" y="8" textAnchor="middle" fill={color} opacity={rev ? 0.35 : 0.4} style={{
+        fontFamily: "'Noto Sans Devanagari', serif",
+        fontSize: "48px",
+        fontWeight: "bold",
+        pointerEvents: "none",
+      }}>ॐ</text>
+
     </g>
+
   </svg>
 );
 
@@ -622,7 +630,7 @@ export default function VedicOracle() {
                   background: sideTab === tab ? `${ac}12` : "transparent",
                   borderBottom: `2px solid ${sideTab === tab ? ac : "transparent"}`,
                   color: sideTab === tab ? ac : T.subtext, cursor: "pointer",
-                  fontFamily: "'Cinzel',serif", fontSize: 8.5, letterSpacing: "0.07em",
+                  fontFamily: "'Cinzel',serif", fontSize: 10, letterSpacing: "0.07em",
                   transition: "all 0.14s",
                 }}>{label}</button>
               ))}
@@ -640,8 +648,8 @@ export default function VedicOracle() {
                     padding: "2px 7px", borderRadius: 20, cursor: "pointer",
                     background: cat === c ? `${ac}18` : "transparent",
                     border: `1px solid ${cat === c ? ac : T.acBorder}`,
-                    color: cat === c ? ac : T.muted,
-                    fontFamily: "'Cinzel',serif", fontSize: 7.5, letterSpacing: "0.06em",
+                    color: cat === c ? ac : T.subtext,
+                    fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: "0.06em",
                     transition: "all 0.13s",
                   }}>{c}</button>
                 ))}
@@ -943,7 +951,8 @@ export default function VedicOracle() {
                   </div>
                   <div style={{
                     fontFamily: "'Noto Sans Devanagari',serif", fontSize: 13,
-                    color: ac, opacity: 0.75, marginBottom: 28, letterSpacing: "0.05em"
+                    color: ac, opacity: 0.75, marginBottom: 28, letterSpacing: "0.05em",
+                    textAlign: "center", lineHeight: 1.9, maxWidth: 620,
                   }}>
                     {sc.mantra}
                   </div>
@@ -1058,12 +1067,16 @@ export default function VedicOracle() {
                     borderTopColor: "transparent", borderRadius: "50%",
                     animation: "rotateSlow 0.8s linear infinite"
                   }} />
-                  : <span style={{ color: input.trim() ? "#fff" : isDark ? "#444" : "#bbb", fontSize: 17 }}>↑</span>
+                  : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: input.trim() ? "#fff" : isDark ? "#444" : "#bbb" }}>
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+
                 }
               </button>
             </div>
           </div>
         </div>
       </div>
-    </> );
+    </>);
 }
