@@ -236,56 +236,28 @@ const TypingRow = ({ color, label }) => (
 // ── Animated Theme Toggle ──────────────────────────────────────────────────────
 const ThemeToggle = ({ isDark, toggle }) => (
   <button onClick={toggle} style={{
-    width: 60, height: 30, borderRadius: 15, border: "none", cursor: "pointer",
-    background: isDark ? "linear-gradient(135deg,#1a1040,#0d0820)"
-      : "linear-gradient(135deg,#ffe066,#fbbf24)",
+    width: 36, height: 36, borderRadius: 9, border: "1px solid rgba(255,255,255,0.08)",
+    background: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+    cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
     position: "relative", overflow: "hidden", flexShrink: 0,
-    boxShadow: isDark ? "0 0 0 1px #4f46e544,0 2px 8px #0008"
-      : "0 0 0 1px #f59e0b55,0 2px 8px #f59e0b22",
-    transition: "background 0.4s, box-shadow 0.4s",
-  }}>
-    {isDark && (
-      <>
-        {[{ top: "5px", left: "8px", s: 1.5 }, { top: "17px", left: "13px", s: 1 }, { top: "7px", left: "23px", s: 2 }].map((st, i) => (
-          <div key={i} style={{
-            position: "absolute", top: st.top, left: st.left,
-            width: st.s, height: st.s, borderRadius: "50%", background: "#c7d2fe",
-            animation: `starPulse ${1.4 + i * 0.5}s ${i * 0.25}s infinite alternate`,
-          }} />
-        ))}
-        <div style={{
-          position: "absolute", top: "50%", left: 6, marginTop: -7,
-          width: 14, height: 14, borderRadius: "50%",
-          border: "1px solid #818cf844",
-          animation: "rotateSlow 3s linear infinite", pointerEvents: "none",
-        }} />
-      </>
-    )}
-    {!isDark && (
-      <div style={{ position: "absolute", top: "50%", right: 9, transform: "translateY(-50%)" }}>
-        {Array.from({ length: 8 }, (_, i) => (
-          <div key={i} style={{
-            position: "absolute", top: 0, left: 0,
-            width: 10, height: 1.5, background: "#92400e",
-            borderRadius: 2, opacity: 0.45, transformOrigin: "0 50%",
-            transform: `rotate(${i * 45}deg) translateX(5px)`,
-            animation: `rayPulse 2s ${i * 0.12}s infinite alternate`,
-          }} />
-        ))}
-      </div>
-    )}
-    <div style={{
-      position: "absolute", top: 2.5,
-      left: isDark ? 2.5 : 32,
-      width: 25, height: 25, borderRadius: "50%",
-      background: isDark ? "linear-gradient(135deg,#e0e7ff,#a5b4fc)"
-        : "linear-gradient(135deg,#fef3c7,#f59e0b)",
-      boxShadow: isDark ? "0 0 10px #818cf899" : "0 0 12px #f59e0baa",
-      transition: "left 0.33s cubic-bezier(0.34,1.56,0.64,1)",
-      display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, zIndex: 1,
+    boxShadow: isDark ? "0 2px 8px rgba(0,0,0,0.2)" : "0 2px 8px rgba(0,0,0,0.05)",
+  }}
+    onMouseEnter={e => {
+      e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)";
+      e.currentTarget.style.transform = "translateY(-1px)";
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.background = isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)";
+      e.currentTarget.style.transform = "translateY(0)";
+    }}
+  >
+    <span style={{
+      fontSize: 16, transition: "transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+      transform: isDark ? "scale(1) rotate(0deg)" : "scale(1) rotate(360deg)"
     }}>
       {isDark ? "🌙" : "☀️"}
-    </div>
+    </span>
   </button>
 );
 
@@ -801,18 +773,6 @@ export default function VedicOracle() {
               display: "flex", flexDirection: "column", gap: 9, flexShrink: 0,
             }}>
               <LangPicker lang={lang} setLang={setLang} ac={ac} isDark={isDark} />
-              <div style={{
-                display: "flex", alignItems: "center",
-                justifyContent: "space-between", padding: "0 2px"
-              }}>
-                <span style={{
-                  fontFamily: "'Cinzel',serif", fontSize: 8.5,
-                  color: T.subtext, letterSpacing: "0.1em", userSelect: "none"
-                }}>
-                  {isDark ? "🌙 DARK MODE" : "☀️ LIGHT MODE"}
-                </span>
-                <ThemeToggle isDark={isDark} toggle={() => setIsDark(d => !d)} />
-              </div>
             </div>
           </>)}
         </div>
@@ -867,7 +827,8 @@ export default function VedicOracle() {
               </div>
             </div>
 
-            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12, flexShrink: 0 }}>
+              <ThemeToggle isDark={isDark} toggle={() => setIsDark(d => !d)} />
               <button
                 onClick={() => { saveToHistory(msgs, sc); setSideTab("history"); if (!sideOpen) setSideOpen(true); }}
                 style={{
