@@ -336,7 +336,156 @@ const loadSessions = () => {
   }
 };
 
+
+// ── Splash Screen ──────────────────────────────────────────────────────────────
+const SplashScreen = ({ onDone }) => {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase(1), 800);
+    const t2 = setTimeout(() => setPhase(2), 2800);
+    const t3 = setTimeout(() => onDone(), 3500);
+    return () => [t1, t2, t3].forEach(clearTimeout);
+  }, []);
+
+  return (
+    <div style={{
+      position: "fixed", inset: 0, zIndex: 9999,
+      background: "#0a0814",
+      display: "flex", flexDirection: "column",
+      alignItems: "center", justifyContent: "center",
+      opacity: phase === 2 ? 0 : 1,
+      transition: phase === 2 ? "opacity 0.7s ease" : "opacity 0.6s ease",
+      pointerEvents: "none",
+    }}>
+      {/* Rotating mandala rings */}
+      <div style={{
+        position: "absolute", width: 360, height: 360, borderRadius: "50%",
+        border: "1px solid rgba(245,158,11,0.12)",
+        animation: "splashSpin 14s linear infinite",
+      }}/>
+      <div style={{
+        position: "absolute", width: 290, height: 290, borderRadius: "50%",
+        border: "1px dashed rgba(245,158,11,0.08)",
+        animation: "splashSpin 9s linear infinite reverse",
+      }}/>
+      <div style={{
+        position: "absolute", width: 220, height: 220, borderRadius: "50%",
+        border: "1px solid rgba(124,58,237,0.1)",
+        animation: "splashSpin 6s linear infinite",
+      }}/>
+
+      {/* Pulsing glow */}
+      <div style={{
+        position: "absolute", width: 220, height: 220, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(245,158,11,0.16) 0%, transparent 70%)",
+        animation: "splashPulse 2.2s ease-in-out infinite",
+      }}/>
+
+      {/* OM circle */}
+      <div style={{
+        width: 116, height: 116, borderRadius: "50%",
+        background: "radial-gradient(circle at 38% 38%, rgba(245,158,11,0.9), #120824)",
+        border: "1.5px solid rgba(245,158,11,0.55)",
+        boxShadow: "0 0 44px rgba(245,158,11,0.45), 0 0 90px rgba(245,158,11,0.12)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        opacity: 1,
+        transform: phase >= 1 ? "scale(1)" : "scale(0.4)",
+        transition: "transform 0.9s cubic-bezier(0.34,1.56,0.64,1)",
+        marginBottom: 30, position: "relative", zIndex: 1,
+      }}>
+        {/* halo ring */}
+        <div style={{
+          position: "absolute", inset: -5, borderRadius: "50%",
+          border: "1.5px solid rgba(245,158,11,0.22)",
+          borderTopColor: "#f59e0b",
+          animation: "splashSpin 5s linear infinite",
+          pointerEvents: "none",
+        }}/>
+        <span style={{
+          fontFamily: "'Noto Sans Devanagari', serif",
+          fontSize: 54, color: "#fff", lineHeight: 1,
+          marginTop: "0.08em", userSelect: "none",
+          filter: "drop-shadow(0 0 10px rgba(245,158,11,0.9))",
+        }}>ॐ</span>
+      </div>
+
+      {/* App name */}
+      <div style={{
+        fontFamily: "'Cinzel', serif", fontSize: 30, fontWeight: 700,
+        color: "#f5f0e8", letterSpacing: "0.22em",
+        opacity: phase >= 1 ? 1 : 0,
+        transform: phase >= 1 ? "translateY(0)" : "translateY(18px)",
+        transition: "all 0.7s ease 0.25s",
+        zIndex: 1,
+      }}>VEDIC ORACLE</div>
+
+      {/* Divider line */}
+      <div style={{
+        width: phase >= 1 ? 180 : 0, height: 1,
+        background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent)",
+        margin: "12px 0",
+        transition: "width 0.8s ease 0.5s",
+        zIndex: 1,
+      }}/>
+
+      {/* Tagline */}
+      <div style={{
+        fontFamily: "'Crimson Text', serif", fontSize: 14,
+        color: "rgba(245,158,11,0.65)", letterSpacing: "0.18em",
+        fontStyle: "italic",
+        opacity: phase >= 1 ? 1 : 0,
+        transform: phase >= 1 ? "translateY(0)" : "translateY(10px)",
+        transition: "all 0.7s ease 0.45s",
+        zIndex: 1,
+      }}>Ancient Wisdom · Awakened by AI</div>
+
+      {/* Sanskrit */}
+      <div style={{
+        fontFamily: "'Noto Sans Devanagari', serif", fontSize: 12,
+        color: "rgba(245,158,11,0.38)", marginTop: 14,
+        letterSpacing: "0.06em",
+        opacity: phase >= 1 ? 1 : 0,
+        transition: "opacity 0.8s ease 0.7s",
+        zIndex: 1,
+      }}>सर्वे भवन्तु सुखिनः · सर्वे सन्तु निरामयाः</div>
+
+      {/* Loading dots */}
+      <div style={{
+        display: "flex", gap: 6, marginTop: 36,
+        opacity: phase >= 1 ? 1 : 0,
+        transition: "opacity 0.6s ease 0.9s",
+        zIndex: 1,
+      }}>
+        {[0,1,2].map(i => (
+          <div key={i} style={{
+            width: 5, height: 5, borderRadius: "50%",
+            background: "rgba(245,158,11,0.5)",
+            animation: `splashDot 1.4s ${i * 0.2}s ease-in-out infinite`,
+          }}/>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes splashSpin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes splashPulse {
+          0%, 100% { transform: scale(1);    opacity: 0.5; }
+          50%       { transform: scale(1.35); opacity: 1;   }
+        }
+        @keyframes splashDot {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+          40%            { transform: scale(1.2); opacity: 1;   }
+        }
+      `}</style>
+    </div>
+  );
+};
+
 export default function VedicOracle() {
+  const [showSplash, setShowSplash] = useState(true);
   const [sc, setSc] = useState(SCRIPTURES[0]);
   const [lang, setLang] = useState("en");
   const [msgs, setMsgs] = useState([]);
@@ -517,6 +666,7 @@ export default function VedicOracle() {
 
   return (
     <>
+      {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600&display=swap');
         *{box-sizing:border-box;margin:0;padding:0;}
@@ -645,7 +795,8 @@ export default function VedicOracle() {
                         width: 30, height: 30, borderRadius: 7, flexShrink: 0,
                         background: active ? `${s.color}18` : `${s.color}0a`,
                         border: `1px solid ${active ? s.color : s.color + "22"}`,
-                        display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: 15, color: T.text,
                       }}>{s.symbol}</div>
                       <div style={{ minWidth: 0, flex: 1 }}>
                         <div style={{
@@ -814,7 +965,7 @@ export default function VedicOracle() {
             >{sideOpen ? "◀" : "▶"}</button>
 
             <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
-              <span style={{ fontSize: 17 }}>{sc.symbol}</span>
+              <span style={{ fontSize: 17, color: T.text }}>{sc.symbol}</span>
               <div style={{ minWidth: 0 }}>
                 <div style={{
                   fontFamily: "'Cinzel',serif", fontSize: 11, fontWeight: 600,
