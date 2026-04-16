@@ -494,7 +494,7 @@ export default function VedicOracle() {
   const [cat, setCat] = useState("All");
   const [errMsg, setErrMsg] = useState("");
   const [isDark, setIsDark] = useState(true);
-  const [sideOpen, setSideOpen] = useState(true);
+  const [sideOpen, setSideOpen] = useState(() => window.innerWidth > 768);
   const [sideTab, setSideTab] = useState("scriptures");
   const [sessions, setSessions] = useState(() => loadSessions());
   const [activeSession, setActiveSession] = useState(null);
@@ -604,6 +604,7 @@ export default function VedicOracle() {
   const newChat = () => {
     if (msgs.filter(m => m.role === "user").length > 0) saveToHistory(msgs, sc);
     setMsgs([makeWelcome(sc)]); setErrMsg(""); setActiveSession(null); setInput("");
+    if (window.innerWidth <= 768) setSideOpen(false);
   };
 
   const restoreSession = (session) => {
@@ -613,6 +614,7 @@ export default function VedicOracle() {
     setMsgs(session.msgs.map(m => ({ ...m, instant: true })));
     setActiveSession(session.id); setErrMsg("");
     setSideTab("scriptures");
+    if (window.innerWidth <= 768) setSideOpen(false);
   };
 
   const deleteSession = (id, e) => {
@@ -684,6 +686,11 @@ export default function VedicOracle() {
         ::-webkit-scrollbar-track{background:transparent;}
         ::-webkit-scrollbar-thumb{border-radius:4px;background:${T.thumb};}
         textarea::placeholder{color:${T.muted};}
+        .mobile-overlay { display: none; }
+        @media (max-width: 768px) {
+          .sidebar-container { position: absolute !important; height: 100dvh !important; z-index: 100 !important; }
+          .mobile-overlay.open { display: block; position: absolute; inset: 0; z-index: 90; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); }
+        }
       `}</style>
 
       <div style={{
@@ -697,9 +704,10 @@ export default function VedicOracle() {
         transition: "background 0.5s",
         overflow: "hidden",
       }}>
+        <div className={`mobile-overlay ${sideOpen ? "open" : ""}`} onClick={() => setSideOpen(false)} />
 
         {/* ═══════════════ SIDEBAR ═══════════════ */}
-        <div style={{
+        <div className="sidebar-container" style={{
           width: sideOpen ? 260 : 0, minWidth: sideOpen ? 260 : 0,
           height: "100dvh", flexShrink: 0, zIndex: 20,
           background: T.sideBg,
@@ -780,7 +788,7 @@ export default function VedicOracle() {
                 {filtered.map(s => {
                   const active = sc.id === s.id;
                   return (
-                    <button key={s.id} onClick={() => setSc(s)} style={{
+                    <button key={s.id} onClick={() => { setSc(s); if (window.innerWidth <= 768) setSideOpen(false); }} style={{
                       display: "flex", alignItems: "center", gap: 9, width: "100%",
                       padding: "8px 9px", borderRadius: 9, cursor: "pointer", textAlign: "left",
                       background: active ? T.activeItem : "transparent",
